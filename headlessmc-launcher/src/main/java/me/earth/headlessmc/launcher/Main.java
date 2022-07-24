@@ -46,7 +46,7 @@ public final class Main {
 
         val validator = new AccountValidator();
         val accountStore = new AccountStore(files, configs);
-        val accounts = new AccountManager(accountStore, validator);
+        val accounts = new AccountManager();
 
         val launcher = new Launcher(hmc, versions, mcFiles, files,
                                     new ProcessFactory(mcFiles, os), configs,
