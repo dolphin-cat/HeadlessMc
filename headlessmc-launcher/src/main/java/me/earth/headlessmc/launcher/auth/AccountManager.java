@@ -1,9 +1,10 @@
 package me.earth.headlessmc.launcher.auth;
 
-import fr.litarvan.openauth.microsoft.MicrosoftAuthResult;
 import fr.litarvan.openauth.microsoft.MicrosoftAuthenticationException;
 import fr.litarvan.openauth.microsoft.MicrosoftAuthenticator;
-import lombok.*;
+import lombok.CustomLog;
+import lombok.Getter;
+import lombok.val;
 import me.earth.headlessmc.api.config.Config;
 import me.earth.headlessmc.launcher.LauncherProperties;
 
@@ -35,15 +36,8 @@ public class AccountManager implements Iterable<Account> {
             return acc.get();
         }
 
-        val email = config.get(LauncherProperties.EMAIL);
-        val password = config.get(LauncherProperties.PASSWORD);
-        if (email != null && password != null) {
-            return this.login(email, password);
-        }
-
-        log.warning("No valid account found!");
-        throw new AuthException("You can't play the game without an account!" +
-                                    " Please use the login command.");
+        log.warning("No Account has been specified!");
+        return new Account("???", "NoAccount", "???");
     }
 
     public Account login(String email, String password) throws AuthException {
@@ -60,7 +54,6 @@ public class AccountManager implements Iterable<Account> {
             validator.validate(account);
             cache.put(hash, account);
             lastAccount = account;
-            save(account);
             return account;
         } catch (MicrosoftAuthenticationException e) {
             throw new AuthException(e.getMessage());

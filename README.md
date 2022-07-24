@@ -1,4 +1,5 @@
-> :warning: HeadlessMc will not allow you to play without having bought Minecraft!
+> :warning: This project is in an early alpha stage of development. Test coverage is non-existent and documentation is 
+poor. But since I won't have too much time during the next months I felt like opening it up to contributions.
 
 ## HeadlessMc
 
